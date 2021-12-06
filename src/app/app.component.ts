@@ -6,5 +6,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'curso-angular-testes-pipes';
+  users = [
+    {
+      name: 'João',
+      status: 1
+    },
+    {
+      name: 'Carlos',
+      status: 2
+    },
+    {
+      name: 'Maria',
+      status: 3
+    },
+  ];
 }
