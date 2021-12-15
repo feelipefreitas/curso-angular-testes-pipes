@@ -7,6 +7,6 @@ import { PipesModule } from "./pipes/pipes.module";
     ],
     exports: [
         PipesModule
-    ]
+    ],
 })
 export class SharedModule { }

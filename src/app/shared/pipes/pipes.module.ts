@@ -7,6 +7,6 @@ import { StatusPipe } from "./status.pipe";
     ],
     exports: [
         StatusPipe
-    ]
+    ],
 })
 export class PipesModule { }

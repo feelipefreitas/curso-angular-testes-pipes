@@ -1,13 +1,14 @@
 import { Pipe, PipeTransform } from "@angular/core";
+import { UserStatusEnum } from "../enums/user-status.enum";
 
 @Pipe({
     name: 'status'
 })
 export class StatusPipe implements PipeTransform {
     transform(status: number): string {
-        if(status === 1) {
+        if(status === UserStatusEnum.ACTIVE) {
             return 'Ativo';
-        } else if(status === 2) {
+        } else if(status === UserStatusEnum.INACTIVE) {
             return 'Inativo';
         } else {
             return 'Outro';

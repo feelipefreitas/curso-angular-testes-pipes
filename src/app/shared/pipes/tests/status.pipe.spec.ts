@@ -1,63 +1,68 @@
 import { Component } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { UserStatusEnum } from "../../enums/user-status.enum";
 import { StatusPipe } from "../status.pipe";
 
 describe('StatusPipe', () => {
-
-    describe('Integrated tests', () => {
+    const USER_STATUS_OTHER = 3;
+    
+    describe('Integrated Tests', () => {
         @Component({
-            template: `Status: {{ status | status }}`
+            template: `Status: {{ userStatus | status }}`
         })
-        class TestComponent {
-            status: number = 0;
+        class StatusPipeTestComponent { 
+            userStatus: number = 0;
         }
 
-        let component: TestComponent;
-        let fixture: ComponentFixture<TestComponent>;
-        let el: HTMLElement;
+        let component: StatusPipeTestComponent;
+        let fixture: ComponentFixture<StatusPipeTestComponent>;
+        let htmlElement: HTMLElement;
 
         beforeEach(() => {
             TestBed.configureTestingModule({
-                declarations: [StatusPipe, TestComponent]
+               declarations: [ StatusPipeTestComponent, StatusPipe ],
             });
 
-            fixture = TestBed.createComponent(TestComponent);
+            fixture = TestBed.createComponent(StatusPipeTestComponent);
             component = fixture.componentInstance;
-            el = fixture.nativeElement;
+            htmlElement = fixture.nativeElement;
         });
-
-        it('Should render the status "Ativo"', () => {
-            component.status = 1;
-            fixture.detectChanges();
-            expect(el.textContent).toContain('Status: Ativo');
-        });
-
-        it('Should render the status "Inativo"', () => {
-            component.status = 2;
-            fixture.detectChanges();
-            expect(el.textContent).toContain('Status: Inativo');
-        });
-
-        it('Should render the status "Outro"', () => {
-            component.status = 3;
-            fixture.detectChanges();
-            expect(el.textContent).toContain('Status: Outro');
-        });
-    });
-
-    describe('Isolated tests', () => {
-        const statusPipe = new StatusPipe();
 
         it('Should return the status "Ativo"', () => {
-            expect(statusPipe.transform(1)).toBe('Ativo');
+            component.userStatus = UserStatusEnum.ACTIVE;
+            fixture.detectChanges();
+ 
+            expect(htmlElement.textContent).toBe('Status: Ativo');
         });
 
         it('Should return the status "Inativo"', () => {
-            expect(statusPipe.transform(2)).toBe('Inativo');
+            component.userStatus = UserStatusEnum.INACTIVE;
+            fixture.detectChanges();
+
+            expect(htmlElement.textContent).toBe('Status: Inativo');
         });
 
         it('Should return the status "Outro"', () => {
-            expect(statusPipe.transform(3)).toBe('Outro');
+            component.userStatus = USER_STATUS_OTHER;
+            fixture.detectChanges();
+
+            expect(htmlElement.textContent).toBe('Status: Outro');
+        });
+    });
+
+    describe('Isolated Tests', () => {
+        const statusPipe = new StatusPipe();
+        
+        it('Should return the status "Ativo"', () => {
+            expect(statusPipe.transform(UserStatusEnum.ACTIVE)).toBe('Ativo');
+        });
+
+        it('Should return the status "Inativo"', () => {
+            expect(statusPipe.transform(UserStatusEnum.INACTIVE)).toBe('Inativo');
+        });
+
+        it('Should return the status "Outro"', () => {
+            expect(statusPipe.transform(USER_STATUS_OTHER)).toBe('Outro');
         });
     });
 });

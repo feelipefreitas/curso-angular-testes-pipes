@@ -1,22 +1,22 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent { 
   users = [
     {
       name: 'João',
       status: 1
     },
     {
-      name: 'Carlos',
+      name: 'Maria',
       status: 2
     },
     {
-      name: 'Maria',
+      name: 'Lucas',
       status: 3
     },
   ];
